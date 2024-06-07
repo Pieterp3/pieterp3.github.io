@@ -53,8 +53,26 @@
         <p>Or pop over to our <a href="https://www.facebook.com/PeerlessFlooring" target="_blank">Facebook page</a> for
             updates and more.</p>
         <p>Thank you for your visit. We promise to provide a perfect platform promptly.</p>
-        <p>Check out our <a href="http://www.peerlessinstallations.com/testingexcelembedding.html"
-                target="_blank">testing page</a> for more details.</p>
+
+
+        <button id="toggleButton">Show Document</button>
+
+        <iframe id="myFrame"
+            src="https://onedrive.live.com/embed?resid=922DFC13D869199A%21211666&authkey=!AEzn7tdHR_2Y7Qo&em=2"
+            width="402" height="346" frameborder="0" scrolling="no" style="display: none;"></iframe>
+
+        <script>
+            document.getElementById('toggleButton').addEventListener('click', function () {
+                var frame = document.getElementById('myFrame');
+                if (frame.style.display === "none") {
+                    frame.style.display = "block";
+                    this.textContent = "Hide Document";
+                } else {
+                    frame.style.display = "none";
+                    this.textContent = "Show Document";
+                }
+            });
+        </script>
     </div>
 </body>
 
