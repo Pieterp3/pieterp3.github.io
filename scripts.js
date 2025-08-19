@@ -97,19 +97,104 @@ function updateGalleryPosition() {
     galleryGrid.style.transform = `translateX(${offset}%)`;
 }
 
+// Touch event variables
+let touchStartX = 0;
+let touchEndX = 0;
+
+// Function to create lightbox content
+function createLightboxContent() {
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightboxImage');
+
+    // Create container
+    const content = document.createElement('div');
+    content.className = 'lightbox-content';
+
+    // Create main image container
+    const main = document.createElement('div');
+    main.className = 'lightbox-main';
+
+    // Create preview containers
+    const prevPreview = document.createElement('div');
+    prevPreview.className = 'lightbox-preview prev';
+    const nextPreview = document.createElement('div');
+    nextPreview.className = 'lightbox-preview next';
+
+    // Move existing elements into new structure
+    main.appendChild(lightboxImg);
+    prevPreview.innerHTML = '<img src="" alt="Previous image">';
+    nextPreview.innerHTML = '<img src="" alt="Next image">';
+
+    content.appendChild(prevPreview);
+    content.appendChild(main);
+    content.appendChild(nextPreview);
+
+    // Add touch events for mobile
+    content.addEventListener('touchstart', handleTouchStart);
+    content.addEventListener('touchend', handleTouchEnd);
+
+    // Add click events for previews
+    prevPreview.addEventListener('click', () => changeImage(-1));
+    nextPreview.addEventListener('click', () => changeImage(1));
+
+    // Replace lightbox contents
+    lightbox.innerHTML = '';
+    lightbox.appendChild(content);
+
+    // Re-add close button
+    const closeButton = document.createElement('button');
+    closeButton.className = 'lightbox-close';
+    closeButton.onclick = closeLightbox;
+    closeButton.innerHTML = '×';
+    lightbox.appendChild(closeButton);
+}
+
+// Touch event handlers
+function handleTouchStart(e) {
+    touchStartX = e.touches[0].clientX;
+}
+
+function handleTouchEnd(e) {
+    touchEndX = e.changedTouches[0].clientX;
+    const swipeDistance = touchStartX - touchEndX;
+
+    if (Math.abs(swipeDistance) > 50) { // Minimum swipe distance
+        if (swipeDistance > 0) {
+            changeImage(1);
+        } else {
+            changeImage(-1);
+        }
+    }
+}
+
 // Lightbox functions
 function openLightbox(index) {
     currentImageIndex = index;
     const lightbox = document.getElementById('lightbox');
-    const lightboxImg = document.getElementById('lightboxImage');
 
-    // Preload the image before showing the lightbox
-    const img = new Image();
-    img.onload = function () {
-        lightboxImg.src = this.src;
-        lightbox.classList.add('active');
-    };
-    img.src = galleryImages[currentImageIndex];
+    // Create lightbox content if it doesn't exist
+    if (!document.querySelector('.lightbox-content')) {
+        createLightboxContent();
+    }
+
+    updateLightboxImages();
+    lightbox.classList.add('active');
+}
+
+function updateLightboxImages() {
+    const mainImg = document.getElementById('lightboxImage');
+    const prevImg = document.querySelector('.lightbox-preview.prev img');
+    const nextImg = document.querySelector('.lightbox-preview.next img');
+
+    // Update main image
+    mainImg.src = galleryImages[currentImageIndex];
+
+    // Update preview images
+    const prevIndex = (currentImageIndex - 1 + galleryImages.length) % galleryImages.length;
+    const nextIndex = (currentImageIndex + 1) % galleryImages.length;
+
+    prevImg.src = galleryImages[prevIndex];
+    nextImg.src = galleryImages[nextIndex];
 }
 
 function closeLightbox() {
@@ -119,11 +204,10 @@ function closeLightbox() {
 
 function changeImage(direction) {
     currentImageIndex = (currentImageIndex + direction + galleryImages.length) % galleryImages.length;
-    const lightboxImg = document.getElementById('lightboxImage');
-    lightboxImg.src = galleryImages[currentImageIndex];
+    updateLightboxImages();
 }
 
-// Close lightbox when clicking outside the image
+// Close lightbox when clicking outside the content
 document.getElementById('lightbox').addEventListener('click', function (e) {
     if (e.target === this) {
         closeLightbox();
