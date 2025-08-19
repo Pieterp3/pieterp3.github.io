@@ -192,27 +192,6 @@
             text-align: center;
         }
 
-        .planning-tool {
-            background-color: var(--light-blue);
-            padding: 2rem;
-            border-radius: 5px;
-            margin-top: 2rem;
-        }
-
-        .tool-button {
-            background-color: var(--secondary-blue);
-            color: var(--white);
-            padding: 1rem 2rem;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin: 1rem 0;
-        }
-
-        .tool-button:hover {
-            background-color: var(--primary-blue);
-        }
-
         @media (max-width: 768px) {
             .hero h1 {
                 font-size: 2rem;
@@ -315,19 +294,6 @@
         </div>
     </section>
 
-    <section class="section">
-        <div class="section-content">
-            <h2 class="section-title">Floor Planning Tool</h2>
-            <div class="planning-tool">
-                <p>Use our interactive floor planning tool to help visualize your project</p>
-                <button id="toggleButton" class="tool-button">Open Floor Planning Tool</button>
-                <iframe id="myFrame"
-                    src="https://onedrive.live.com/embed?resid=922DFC13D869199A%21211666&authkey=!AEzn7tdHR_2Y7Qo&em=2"
-                    width="100%" height="600px" frameborder="0" scrolling="no" style="display: none;"></iframe>
-            </div>
-        </div>
-    </section>
-
     <section class="section" id="contact">
         <div class="section-content">
             <h2 class="section-title">Get Your Free Estimate</h2>
@@ -368,21 +334,34 @@
     </footer>
 
     <script>
-        document.getElementById('toggleButton').addEventListener('click', function () {
-            var frame = document.getElementById('myFrame');
-            if (frame.style.display === "none") {
-                frame.style.display = "block";
-                this.textContent = "Close Floor Planning Tool";
-            } else {
-                frame.style.display = "none";
-                this.textContent = "Open Floor Planning Tool";
-            }
-        });
-
         document.getElementById('estimateForm').addEventListener('submit', function (e) {
             e.preventDefault();
-            // Add form submission logic here
-            alert('Thank you for your request. We will contact you shortly!');
+
+            // Get form data
+            const formData = {
+                name: document.getElementById('name').value,
+                phone: document.getElementById('phone').value,
+                email: document.getElementById('email').value,
+                address: document.getElementById('address').value,
+                message: document.getElementById('message').value
+            };
+
+            // Create mailto link with form data
+            const subject = encodeURIComponent('New Estimate Request - Peerless Flooring');
+            const body = encodeURIComponent(
+                `New Estimate Request\n\n` +
+                `Name: ${formData.name}\n` +
+                `Phone: ${formData.phone}\n` +
+                `Email: ${formData.email}\n` +
+                `Address: ${formData.address}\n\n` +
+                `Project Details:\n${formData.message}`
+            );
+
+            // Open default email client
+            window.location.href = `mailto:baronepieter@gmail.com?subject=${subject}&body=${body}`;
+
+            // Show success message
+            alert('Thank you for your request. Opening your email client...');
             this.reset();
         });
     </script>
