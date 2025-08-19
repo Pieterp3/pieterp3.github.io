@@ -60,8 +60,15 @@
     <section class="section gallery">
         <div class="section-content">
             <h2 class="section-title">Our Work</h2>
-            <div class="gallery-grid" id="galleryGrid">
-                <!-- Gallery items will be dynamically added here -->
+            <div class="gallery-container">
+                <button class="gallery-nav gallery-prev" onclick="moveGallery(-1)">❮</button>
+                <div class="gallery-grid" id="galleryGrid">
+                    <!-- Gallery items will be dynamically added here -->
+                </div>
+                <button class="gallery-nav gallery-next" onclick="moveGallery(1)">❯</button>
+            </div>
+            <div class="gallery-pagination" id="galleryPagination">
+                <!-- Pagination dots will be added here -->
             </div>
         </div>
         <!-- Lightbox -->

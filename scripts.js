@@ -1,6 +1,8 @@
 // Gallery and Lightbox functionality
 let currentImageIndex = 0;
+let currentPage = 0;
 const galleryImages = [];
+const imagesPerPage = 3;
 
 // Function to load images from the images folder
 function loadGalleryImages() {
@@ -30,12 +32,19 @@ function loadGalleryImages() {
             loadedImages++;
             currentImage++;
             tryLoadImage(); // Try next image
+
+            // Update pagination after loading images
+            if (loadedImages % imagesPerPage === 0) {
+                updatePagination();
+            }
         };
 
         img.onerror = function () {
             // No more images to load
             if (loadedImages === 0) {
                 galleryGrid.innerHTML = '<p>Gallery images coming soon!</p>';
+            } else {
+                updatePagination();
             }
         };
 
@@ -45,13 +54,59 @@ function loadGalleryImages() {
     tryLoadImage(); // Start loading images
 }
 
+// Function to update pagination dots
+function updatePagination() {
+    const paginationContainer = document.getElementById('galleryPagination');
+    const totalPages = Math.ceil(galleryImages.length / imagesPerPage);
+
+    paginationContainer.innerHTML = '';
+
+    for (let i = 0; i < totalPages; i++) {
+        const dot = document.createElement('div');
+        dot.className = `page-dot${i === currentPage ? ' active' : ''}`;
+        dot.addEventListener('click', () => goToPage(i));
+        paginationContainer.appendChild(dot);
+    }
+}
+
+// Function to move to specific page
+function goToPage(page) {
+    const totalPages = Math.ceil(galleryImages.length / imagesPerPage);
+    if (page >= 0 && page < totalPages) {
+        currentPage = page;
+        updateGalleryPosition();
+        updatePagination();
+    }
+}
+
+// Function to move gallery
+function moveGallery(direction) {
+    const totalPages = Math.ceil(galleryImages.length / imagesPerPage);
+    currentPage = (currentPage + direction + totalPages) % totalPages;
+    updateGalleryPosition();
+    updatePagination();
+}
+
+// Function to update gallery position
+function updateGalleryPosition() {
+    const galleryGrid = document.getElementById('galleryGrid');
+    const offset = -currentPage * (100);
+    galleryGrid.style.transform = `translateX(${offset}%)`;
+}
+
 // Lightbox functions
 function openLightbox(index) {
     currentImageIndex = index;
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightboxImage');
-    lightboxImg.src = galleryImages[currentImageIndex];
-    lightbox.classList.add('active');
+
+    // Preload the image before showing the lightbox
+    const img = new Image();
+    img.onload = function () {
+        lightboxImg.src = this.src;
+        lightbox.classList.add('active');
+    };
+    img.src = galleryImages[currentImageIndex];
 }
 
 function closeLightbox() {
