@@ -4,74 +4,388 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Peerless Flooring - Presently Under Progress</title>
+    <title>Peerless Flooring - Expert Installation Services</title>
     <style>
+        :root {
+            --primary-blue: #2c5282;
+            --secondary-blue: #4299e1;
+            --light-blue: #ebf8ff;
+            --dark-gray: #2d3748;
+            --light-gray: #e2e8f0;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
         body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            text-align: center;
-            color: #333;
             line-height: 1.6;
+            color: var(--dark-gray);
         }
 
-        h1 {
-            color: #444;
-            margin-bottom: 20px;
+        .navbar {
+            background-color: var(--white);
+            padding: 1rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
-        a {
-            color: #0066cc;
+        .navbar-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-blue);
+        }
+
+        .nav-contact {
+            color: var(--primary-blue);
+            font-weight: bold;
             text-decoration: none;
         }
 
-        a:hover {
-            color: #004d99;
+        .hero {
+            background: linear-gradient(rgba(44, 82, 130, 0.9), rgba(44, 82, 130, 0.9)), url('images/1.png');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: var(--white);
+            padding-top: 60px;
         }
 
-        div {
+        .hero-content {
             max-width: 800px;
             margin: 0 auto;
-            padding: 20px;
-            background-color: #fff;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-            border-radius: 4px;
+            padding: 2rem;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background-color: var(--secondary-blue);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .cta-button:hover {
+            background-color: var(--primary-blue);
+        }
+
+        .section {
+            padding: 5rem 2rem;
+        }
+
+        .section-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--primary-blue);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .service-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .gallery {
+            background-color: var(--light-gray);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid var(--light-gray);
+            border-radius: 3px;
+        }
+
+        .form-group textarea {
+            height: 150px;
+        }
+
+        .submit-button {
+            background-color: var(--primary-blue);
+            color: var(--white);
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .submit-button:hover {
+            background-color: var(--secondary-blue);
+        }
+
+        footer {
+            background-color: var(--dark-gray);
+            color: var(--white);
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .planning-tool {
+            background-color: var(--light-blue);
+            padding: 2rem;
+            border-radius: 5px;
+            margin-top: 2rem;
+        }
+
+        .tool-button {
+            background-color: var(--secondary-blue);
+            color: var(--white);
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 1rem 0;
+        }
+
+        .tool-button:hover {
+            background-color: var(--primary-blue);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .section {
+                padding: 3rem 1rem;
+            }
         }
     </style>
 </head>
 
 <body>
-    <div>
-        <h1>Welcome to Peerless Flooring</h1>
-        <p>Our platform is presently in the process of being polished to perfection. We prize your patience and
-            participation.</p>
-        <p>While we're working, we're still here to help. Please place a call to <a
-                href="tel:5862240550">586.224.0550</a></p>
-        <p>Or pop over to our <a href="https://www.facebook.com/PeerlessFlooring" target="_blank">Facebook page</a> for
-            updates and more.</p>
+    <nav class="navbar">
+        <div class="navbar-content">
+            <div class="logo">Peerless Flooring</div>
+            <a href="tel:5862240550" class="nav-contact">586.224.0550</a>
+        </div>
+    </nav>
 
-        <p>Meanwhile, make the most of our meticulous <br><button id="toggleButton">Mapping Module</button>
-            <br />to map out your magnificent masterpiece.
-        </p>
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Expert Flooring Installation in Metro Detroit</h1>
+            <p>Over 9 years of specialized experience in hardwood, vinyl, and more. Free estimates with custom
+                floorplans.</p>
+            <a href="#contact" class="cta-button">Get Your Free Estimate</a>
+        </div>
+    </section>
 
-        <iframe id="myFrame"
-            src="https://onedrive.live.com/embed?resid=922DFC13D869199A%21211666&authkey=!AEzn7tdHR_2Y7Qo&em=2"
-            width="100%" height="400px" frameborder="0" scrolling="no" style="display: none;"></iframe>
+    <section class="section">
+        <div class="section-content">
+            <h2 class="section-title">Our Services</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <h3>Hardwood Flooring</h3>
+                    <p>Expert installation of hardwood flooring with precision and care.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Vinyl Flooring</h3>
+                    <p>Professional vinyl flooring installation for durability and style.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Laminate Flooring</h3>
+                    <p>Quality laminate installation for a beautiful, cost-effective solution.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Baseboards & Trim</h3>
+                    <p>Complete your look with professional baseboard and trim installation.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Rubber Flooring</h3>
+                    <p>Specialized installation of rubber flooring for commercial spaces.</p>
+                </div>
+                <div class="service-card">
+                    <h3>VCT Installation</h3>
+                    <p>Professional VCT tile installation for commercial applications.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        <script>
-            document.getElementById('toggleButton').addEventListener('click', function () {
-                var frame = document.getElementById('myFrame');
-                if (frame.style.display === "none") {
-                    frame.style.display = "block";
-                } else {
-                    frame.style.display = "none";
-                }
-            });
-        </script>
-    </div>
+    <section class="section gallery">
+        <div class="section-content">
+            <h2 class="section-title">Our Work</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="images/1.png" alt="Flooring Installation Project">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/2.png" alt="Flooring Installation Project">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/3.png" alt="Flooring Installation Project">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="section-content">
+            <h2 class="section-title">Why Choose Us?</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <h3>Experience</h3>
+                    <p>Over 9 years of specialized flooring installation experience.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Free Estimates</h3>
+                    <p>Detailed estimates including custom floorplans for your project.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Warranty</h3>
+                    <p>1-year labor warranty and assistance with manufacturer warranties.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Service Area</h3>
+                    <p>Based in Oxford, serving Metro Detroit and surrounding areas.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="section-content">
+            <h2 class="section-title">Floor Planning Tool</h2>
+            <div class="planning-tool">
+                <p>Use our interactive floor planning tool to help visualize your project</p>
+                <button id="toggleButton" class="tool-button">Open Floor Planning Tool</button>
+                <iframe id="myFrame"
+                    src="https://onedrive.live.com/embed?resid=922DFC13D869199A%21211666&authkey=!AEzn7tdHR_2Y7Qo&em=2"
+                    width="100%" height="600px" frameborder="0" scrolling="no" style="display: none;"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="contact">
+        <div class="section-content">
+            <h2 class="section-title">Get Your Free Estimate</h2>
+            <div class="contact-form">
+                <form id="estimateForm">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone</label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Project Address</label>
+                        <input type="text" id="address" name="address" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Project Details</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-button">Request Estimate</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2025 Peerless Flooring. All rights reserved.</p>
+        <p>Serving Metro Detroit and surrounding areas</p>
+        <p><a href="tel:5862240550" style="color: white;">586.224.0550</a></p>
+        <p><a href="https://www.facebook.com/PeerlessFlooring" target="_blank" style="color: white;">Visit us on
+                Facebook</a></p>
+    </footer>
+
+    <script>
+        document.getElementById('toggleButton').addEventListener('click', function () {
+            var frame = document.getElementById('myFrame');
+            if (frame.style.display === "none") {
+                frame.style.display = "block";
+                this.textContent = "Close Floor Planning Tool";
+            } else {
+                frame.style.display = "none";
+                this.textContent = "Open Floor Planning Tool";
+            }
+        });
+
+        document.getElementById('estimateForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            // Add form submission logic here
+            alert('Thank you for your request. We will contact you shortly!');
+            this.reset();
+        });
+    </script>
 </body>
 
 </html>
