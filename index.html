@@ -5,203 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Peerless Flooring - Expert Installation Services</title>
-    <style>
-        :root {
-            --primary-blue: #2c5282;
-            --secondary-blue: #4299e1;
-            --light-blue: #ebf8ff;
-            --dark-gray: #2d3748;
-            --light-gray: #e2e8f0;
-            --white: #ffffff;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Arial', sans-serif;
-        }
-
-        body {
-            line-height: 1.6;
-            color: var(--dark-gray);
-        }
-
-        .navbar {
-            background-color: var(--white);
-            padding: 1rem;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        .navbar-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: var(--primary-blue);
-        }
-
-        .nav-contact {
-            color: var(--primary-blue);
-            font-weight: bold;
-            text-decoration: none;
-        }
-
-        .hero {
-            background: linear-gradient(rgba(44, 82, 130, 0.9), rgba(44, 82, 130, 0.9)), url('images/1.png');
-            background-size: cover;
-            background-position: center;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            text-align: center;
-            color: var(--white);
-            padding-top: 60px;
-        }
-
-        .hero-content {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
-
-        .hero h1 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-        }
-
-        .cta-button {
-            display: inline-block;
-            padding: 1rem 2rem;
-            background-color: var(--secondary-blue);
-            color: var(--white);
-            text-decoration: none;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-        }
-
-        .cta-button:hover {
-            background-color: var(--primary-blue);
-        }
-
-        .section {
-            padding: 5rem 2rem;
-        }
-
-        .section-content {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 3rem;
-            color: var(--primary-blue);
-        }
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .service-card {
-            background: var(--white);
-            padding: 2rem;
-            border-radius: 5px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        .gallery {
-            background-color: var(--light-gray);
-        }
-
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1rem;
-        }
-
-        .gallery-item img {
-            width: 100%;
-            height: 300px;
-            object-fit: cover;
-            border-radius: 5px;
-        }
-
-        .contact-form {
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-        }
-
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 0.5rem;
-            border: 1px solid var(--light-gray);
-            border-radius: 3px;
-        }
-
-        .form-group textarea {
-            height: 150px;
-        }
-
-        .submit-button {
-            background-color: var(--primary-blue);
-            color: var(--white);
-            padding: 1rem 2rem;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            width: 100%;
-        }
-
-        .submit-button:hover {
-            background-color: var(--secondary-blue);
-        }
-
-        footer {
-            background-color: var(--dark-gray);
-            color: var(--white);
-            padding: 2rem;
-            text-align: center;
-        }
-
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2rem;
-            }
-
-            .section {
-                padding: 3rem 1rem;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
@@ -256,17 +60,16 @@
     <section class="section gallery">
         <div class="section-content">
             <h2 class="section-title">Our Work</h2>
-            <div class="gallery-grid">
-                <div class="gallery-item">
-                    <img src="images/1.png" alt="Flooring Installation Project">
-                </div>
-                <div class="gallery-item">
-                    <img src="images/2.png" alt="Flooring Installation Project">
-                </div>
-                <div class="gallery-item">
-                    <img src="images/3.png" alt="Flooring Installation Project">
-                </div>
+            <div class="gallery-grid" id="galleryGrid">
+                <!-- Gallery items will be dynamically added here -->
             </div>
+        </div>
+        <!-- Lightbox -->
+        <div class="lightbox" id="lightbox">
+            <button class="lightbox-close" onclick="closeLightbox()">×</button>
+            <button class="lightbox-nav lightbox-prev" onclick="changeImage(-1)">❮</button>
+            <img id="lightboxImage" src="" alt="Full size image">
+            <button class="lightbox-nav lightbox-next" onclick="changeImage(1)">❯</button>
         </div>
     </section>
 
@@ -333,38 +136,7 @@
                 Facebook</a></p>
     </footer>
 
-    <script>
-        document.getElementById('estimateForm').addEventListener('submit', function (e) {
-            e.preventDefault();
-
-            // Get form data
-            const formData = {
-                name: document.getElementById('name').value,
-                phone: document.getElementById('phone').value,
-                email: document.getElementById('email').value,
-                address: document.getElementById('address').value,
-                message: document.getElementById('message').value
-            };
-
-            // Create mailto link with form data
-            const subject = encodeURIComponent('New Estimate Request - Peerless Flooring');
-            const body = encodeURIComponent(
-                `New Estimate Request\n\n` +
-                `Name: ${formData.name}\n` +
-                `Phone: ${formData.phone}\n` +
-                `Email: ${formData.email}\n` +
-                `Address: ${formData.address}\n\n` +
-                `Project Details:\n${formData.message}`
-            );
-
-            // Open default email client
-            window.location.href = `mailto:baronepieter@gmail.com?subject=${subject}&body=${body}`;
-
-            // Show success message
-            alert('Thank you for your request. Opening your email client...');
-            this.reset();
-        });
-    </script>
+    <script src="scripts.js"></script>
 </body>
 
 </html>
