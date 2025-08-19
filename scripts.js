@@ -23,7 +23,10 @@ function loadGalleryImages() {
             displayImg.src = imagePath;
             displayImg.alt = `Flooring Installation Project ${currentImage}`;
 
-            galleryItem.addEventListener('click', () => openLightbox(loadedImages));
+            // Add click event to both the div and the image
+            const openLightboxHandler = () => openLightbox(loadedImages);
+            galleryItem.addEventListener('click', openLightboxHandler);
+            displayImg.addEventListener('click', openLightboxHandler);
 
             galleryItem.appendChild(displayImg);
             galleryGrid.appendChild(galleryItem);
