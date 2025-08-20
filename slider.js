@@ -8,16 +8,22 @@ function createBeforeAfterSlider(beforeImage, afterImage, index) {
     const beforeSide = document.createElement('div');
     beforeSide.className = 'slider-before';
     const beforeImg = document.createElement('img');
+    beforeImg.loading = 'lazy';
     beforeImg.src = beforeImage;
     beforeImg.alt = 'Before transformation';
+    beforeImg.srcset = `${beforeImage} 1200w, ${beforeImage} 800w, ${beforeImage} 400w`;
+    beforeImg.sizes = "(max-width: 500px) 400px, (max-width: 900px) 800px, 1200px";
     beforeSide.appendChild(beforeImg);
 
     // Create after side
     const afterSide = document.createElement('div');
     afterSide.className = 'slider-after';
     const afterImg = document.createElement('img');
+    afterImg.loading = 'lazy';
     afterImg.src = afterImage;
     afterImg.alt = 'After transformation';
+    afterImg.srcset = `${afterImage} 1200w, ${afterImage} 800w, ${afterImage} 400w`;
+    afterImg.sizes = "(max-width: 500px) 400px, (max-width: 900px) 800px, 1200px";
     afterSide.appendChild(afterImg);
 
     // Create handle

@@ -20,8 +20,11 @@ function loadGalleryImages() {
             galleryItem.className = 'gallery-item';
 
             const displayImg = document.createElement('img');
+            displayImg.loading = 'lazy'; // Add lazy loading
             displayImg.src = imagePath;
             displayImg.alt = `Flooring Installation Project ${currentImage}`;
+            displayImg.srcset = `${imagePath} 1200w, ${imagePath} 800w, ${imagePath} 400w`;
+            displayImg.sizes = "(max-width: 500px) 400px, (max-width: 900px) 800px, 1200px";
 
             // Add click event to both the div and the image
             const openLightboxHandler = (e) => {

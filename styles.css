@@ -169,6 +169,7 @@ body {
     max-width: 900px;
     margin: 0 auto;
     position: relative;
+    contain: content;
 }
 
 .transformation-navigation {
@@ -319,6 +320,9 @@ body {
 .gallery-grid {
     display: flex;
     transition: transform 0.5s ease;
+    will-change: transform;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
 }
 
 .gallery-item {
@@ -425,7 +429,10 @@ body {
     background-color: rgba(0, 0, 0, 0.95);
     z-index: 1000;
     opacity: 0;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.2s ease;
+    will-change: opacity;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
 }
 
 .lightbox.active {
