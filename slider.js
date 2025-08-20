@@ -248,27 +248,30 @@ async function loadTransformationSliders() {
 
     let currentIndex = 1;
     while (true) {
-        const letterImage = `images/baslider/${String.fromCharCode(96 + currentIndex)}.png`;
         const numberImage = `images/baslider/${currentIndex}.png`;
+        const letterImage = `images/baslider/${String.fromCharCode(96 + currentIndex)}.png`;
 
         // Check if both images exist
-        const [letterExists, numberExists] = await Promise.all([
-            imageExists(letterImage),
-            imageExists(numberImage)
+        const [numberExists, letterExists] = await Promise.all([
+            imageExists(numberImage),
+            imageExists(letterImage)
         ]);
 
-        // Stop if we can't find the letter image (before)
-        if (!letterExists) break;
+        // Stop if we can't find the number image (before)
+        if (!numberExists) break;
 
         // Only create slider if we have both images
-        if (numberExists) {
+        if (letterExists) {
             // Create and add the slider
-            const slider = createBeforeAfterSlider(letterImage, numberImage, currentIndex - 1); // Zero-based index for DOM
+            const slider = createBeforeAfterSlider(numberImage, letterImage, currentIndex - 1); // Zero-based index for DOM
             container.appendChild(slider);
             totalTransformations++;
         }
 
         currentIndex++;
+
+        // Safety check to prevent infinite loop
+        if (currentIndex > 20) break;
     }
 
     // Reset the count to match actual slides
