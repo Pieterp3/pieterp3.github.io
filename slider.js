@@ -249,7 +249,7 @@ async function loadTransformationSliders() {
     let currentIndex = 0;
     while (true) {
         const numberImage = `images/baslider/${currentIndex}.png`;
-        const letterImage = `images/baslider/${String.fromCharCode(96 + currentIndex)}.png`;
+        const letterImage = `images/baslider/${String.fromCharCode(97 + currentIndex)}.png`;
 
         // Check if both images exist
         const [numberExists, letterExists] = await Promise.all([
