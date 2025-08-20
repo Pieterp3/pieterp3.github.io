@@ -248,29 +248,22 @@ async function loadTransformationSliders() {
 
     let currentIndex = 1;
     while (true) {
-        const beforeImage = `images/baslider/${currentIndex}.png`;
-        // Try both number and letter naming conventions for after images
-        const afterImageNumber = `images/baslider/${currentIndex + 1}.png`;
-        const afterImageLetter = `images/baslider/${String.fromCharCode(96 + currentIndex)}.png`;
+        const letterImage = `images/baslider/${String.fromCharCode(96 + currentIndex)}.png`;
+        const numberImage = `images/baslider/${currentIndex}.png`;
 
-        // Check if before image and either type of after image exists
-        const [beforeExists, afterNumberExists, afterLetterExists] = await Promise.all([
-            imageExists(beforeImage),
-            imageExists(afterImageNumber),
-            imageExists(afterImageLetter)
+        // Check if both images exist
+        const [letterExists, numberExists] = await Promise.all([
+            imageExists(letterImage),
+            imageExists(numberImage)
         ]);
 
-        // Stop if we can't find the before image
-        if (!beforeExists) break;
-
-        // Use whichever after image exists (prefer letter naming)
-        const afterImage = afterLetterExists ? afterImageLetter :
-            afterNumberExists ? afterImageNumber : null;
+        // Stop if we can't find the letter image (before)
+        if (!letterExists) break;
 
         // Only create slider if we have both images
-        if (afterImage) {
+        if (numberExists) {
             // Create and add the slider
-            const slider = createBeforeAfterSlider(beforeImage, afterImage, currentIndex - 1); // Zero-based index for DOM
+            const slider = createBeforeAfterSlider(letterImage, numberImage, currentIndex - 1); // Zero-based index for DOM
             container.appendChild(slider);
             totalTransformations++;
         }
