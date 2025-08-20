@@ -86,10 +86,75 @@ function createBeforeAfterSlider(beforeImage, afterImage, index) {
     return slider;
 }
 
+// Global variables for transformation slider
+let currentTransformIndex = 0;
+const transformationsPerPage = 1;
+let totalTransformations = 0;
+
+// Function to show specific transformation
+function showTransformation(index) {
+    const container = document.getElementById('transformationSlider');
+    const sliders = container.getElementsByClassName('before-after-slider');
+
+    // Hide all sliders
+    Array.from(sliders).forEach(slider => {
+        slider.style.display = 'none';
+    });
+
+    // Show current slider
+    if (sliders[index]) {
+        sliders[index].style.display = 'block';
+    }
+
+    // Update navigation buttons
+    updateTransformationNavigation();
+}
+
+// Function to update transformation navigation
+function updateTransformationNavigation() {
+    const prevButton = document.getElementById('transformPrev');
+    const nextButton = document.getElementById('transformNext');
+    const pagination = document.getElementById('transformPagination');
+
+    if (prevButton && nextButton) {
+        prevButton.disabled = currentTransformIndex === 0;
+        nextButton.disabled = currentTransformIndex >= totalTransformations - 1;
+    }
+
+    if (pagination) {
+        pagination.innerHTML = '';
+        for (let i = 0; i < totalTransformations; i++) {
+            const dot = document.createElement('div');
+            dot.className = `transform-dot${i === currentTransformIndex ? ' active' : ''}`;
+            dot.addEventListener('click', () => {
+                currentTransformIndex = i;
+                showTransformation(i);
+            });
+            pagination.appendChild(dot);
+        }
+    }
+}
+
+// Function to navigate transformations
+function navigateTransformation(direction) {
+    currentTransformIndex = Math.max(0, Math.min(currentTransformIndex + direction, totalTransformations - 1));
+    showTransformation(currentTransformIndex);
+}
+
 // Load and initialize before/after sliders
 async function loadTransformationSliders() {
     const container = document.getElementById('transformationSlider');
     if (!container) return;
+
+    // Create navigation elements
+    const navigation = document.createElement('div');
+    navigation.className = 'transformation-navigation';
+    navigation.innerHTML = `
+        <button id="transformPrev" onclick="navigateTransformation(-1)">❮</button>
+        <div id="transformPagination" class="transform-pagination"></div>
+        <button id="transformNext" onclick="navigateTransformation(1)">❯</button>
+    `;
+    container.parentElement.appendChild(navigation);
 
     // Function to check if image exists
     const imageExists = async (url) => {
@@ -120,6 +185,13 @@ async function loadTransformationSliders() {
         container.appendChild(slider);
 
         currentIndex++;
+    }
+
+    totalTransformations = currentIndex - 1;
+
+    // Show first transformation and initialize navigation
+    if (totalTransformations > 0) {
+        showTransformation(0);
     }
 }
 

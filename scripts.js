@@ -24,7 +24,11 @@ function loadGalleryImages() {
             displayImg.alt = `Flooring Installation Project ${currentImage}`;
 
             // Add click event to both the div and the image
-            const openLightboxHandler = () => openLightbox(loadedImages);
+            const openLightboxHandler = (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                openLightbox(loadedImages);
+            };
             galleryItem.addEventListener('click', openLightboxHandler);
             displayImg.addEventListener('click', openLightboxHandler);
 
