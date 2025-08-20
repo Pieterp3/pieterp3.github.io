@@ -32,6 +32,14 @@ function loadGalleryImages() {
         const img = new Image();
 
         img.onload = function () {
+            // Remove loading indicator after first image loads
+            if (loadedImages === 0) {
+                const loadingIndicator = document.querySelector('.loading-indicator');
+                if (loadingIndicator) {
+                    loadingIndicator.remove();
+                }
+            }
+
             // Image exists, prepare gallery item
             const galleryItem = document.createElement('div');
             galleryItem.className = 'gallery-item';
@@ -58,6 +66,11 @@ function loadGalleryImages() {
 
             galleryItem.appendChild(displayImg);
             galleryGrid.appendChild(galleryItem);
+
+            // Show the image after it's loaded
+            setTimeout(() => {
+                galleryItem.style.opacity = '1';
+            }, 50);
 
             galleryImages.push(imagePath);
             loadedImages++;
