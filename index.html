@@ -19,8 +19,16 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="preload" as="image" href="images/1.png">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="icon" type="image/png" href="images/favicon.png">
     <meta name="theme-color" content="#2c5282">
-    <!-- Disable automatic phone number linking on mobile -->
+    <link rel="canonical" href="https://pieterp3.github.io" />
+    <!-- Performance optimizations -->
+    <link rel="dns-prefetch" href="https://www.facebook.com">
+    <meta name="format-detection" content="address=no">
+    <!-- Image optimization -->
+    <meta property="og:image" content="https://pieterp3.github.io/images/1.png">
+    <meta property="og:image:alt" content="Peerless Flooring - Expert Installation Services">
+    <!-- Disable automatic linking on mobile -->
     <meta name="format-detection" content="telephone=no">
     <script type="application/ld+json">
     {
@@ -230,27 +238,48 @@
         </div>
     </section>
 
-    <section class="section testimonials-section">
+    <section class="section testimonials-section" id="testimonials" aria-label="Customer Testimonials">
         <div class="section-content">
             <h2 class="section-title">What Our Customers Say</h2>
-            <div class="testimonials-grid">
-                <div class="testimonial-card">
-                    <div class="testimonial-rating">★★★★★</div>
-                    <p class="testimonial-text">"Exceptional work on our hardwood floors. The attention to detail and
+            <div class="testimonials-grid" itemscope itemtype="https://schema.org/Review">
+                <div class="testimonial-card" itemprop="review">
+                    <div class="testimonial-rating" itemprop="reviewRating" itemscope
+                        itemtype="https://schema.org/Rating">
+                        <meta itemprop="ratingValue" content="5">
+                        <meta itemprop="bestRating" content="5">
+                        ★★★★★
+                    </div>
+                    <p class="testimonial-text" itemprop="reviewBody">"Exceptional work on our hardwood floors. The
+                        attention to detail and
                         craftsmanship was outstanding. Our home looks completely transformed!"</p>
-                    <p class="testimonial-author">- Sarah M., Rochester Hills</p>
+                    <p class="testimonial-author" itemprop="author">- Sarah M., Rochester Hills</p>
+                    <meta itemprop="datePublished" content="2025-06-15">
                 </div>
-                <div class="testimonial-card">
-                    <div class="testimonial-rating">★★★★★</div>
-                    <p class="testimonial-text">"Professional, punctual, and perfect results. They installed vinyl
+                <div class="testimonial-card" itemprop="review">
+                    <div class="testimonial-rating" itemprop="reviewRating" itemscope
+                        itemtype="https://schema.org/Rating">
+                        <meta itemprop="ratingValue" content="5">
+                        <meta itemprop="bestRating" content="5">
+                        ★★★★★
+                    </div>
+                    <p class="testimonial-text" itemprop="reviewBody">"Professional, punctual, and perfect results. They
+                        installed vinyl
                         flooring throughout our first floor and we couldn't be happier."</p>
-                    <p class="testimonial-author">- Mike D., Troy</p>
+                    <p class="testimonial-author" itemprop="author">- Mike D., Troy</p>
+                    <meta itemprop="datePublished" content="2025-07-01">
                 </div>
-                <div class="testimonial-card">
-                    <div class="testimonial-rating">★★★★★</div>
-                    <p class="testimonial-text">"Fair pricing and excellent communication throughout the project. The
+                <div class="testimonial-card" itemprop="review">
+                    <div class="testimonial-rating" itemprop="reviewRating" itemscope
+                        itemtype="https://schema.org/Rating">
+                        <meta itemprop="ratingValue" content="5">
+                        <meta itemprop="bestRating" content="5">
+                        ★★★★★
+                    </div>
+                    <p class="testimonial-text" itemprop="reviewBody">"Fair pricing and excellent communication
+                        throughout the project. The
                         team was clean, efficient, and highly skilled."</p>
-                    <p class="testimonial-author">- Jennifer R., Oxford</p>
+                    <p class="testimonial-author" itemprop="author">- Jennifer R., Oxford</p>
+                    <meta itemprop="datePublished" content="2025-07-15">
                 </div>
             </div>
             <div class="testimonial-stats">
@@ -382,21 +411,48 @@
         </div>
     </section>
 
-    <footer>
-        <p>© 2025 Peerless Flooring. All rights reserved.</p>
-        <p>Serving Metro Detroit and surrounding areas</p>
-        <p><a href="tel:5862240550" style="color: white;">586.224.0550</a></p>
-        <p><a href="https://www.facebook.com/PeerlessFlooring" target="_blank" style="color: white;">Visit us on
-                Facebook</a></p>
+    <footer itemscope itemtype="https://schema.org/LocalBusiness">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Contact Us</h4>
+                <p><a href="tel:5862240550" class="footer-link"><span itemprop="telephone">586.224.0550</span></a></p>
+                <p itemprop="email"><a href="mailto:baronepieter@gmail.com"
+                        class="footer-link">baronepieter@gmail.com</a></p>
+                <p><strong>Hours:</strong> Mon-Fri 9AM-5PM</p>
+            </div>
+            <div class="footer-section">
+                <h4>Service Areas</h4>
+                <p itemprop="areaServed">Proudly serving Metro Detroit including Oxford, Rochester, Troy, Birmingham,
+                    Romeo, and surrounding areas</p>
+            </div>
+            <div class="footer-section">
+                <h4>Connect With Us</h4>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/PeerlessFlooring" target="_blank" rel="noopener"
+                        class="footer-link" aria-label="Follow us on Facebook">
+                        Facebook
+                    </a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Emergency Service</h4>
+                <p>Available for urgent commercial projects</p>
+                <a href="#contact" class="emergency-link">Request Emergency Service</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 Peerless Flooring. Licensed & Insured. All rights reserved.</p>
+            <p>Website last updated: August 2025</p>
+        </div>
     </footer>
 
     <!-- Floating CTA Buttons -->
-    <div class="floating-cta">
-        <a href="tel:5862240550" class="floating-cta-button phone">
-            📞 Call Now
+    <div class="floating-cta" aria-label="Quick Contact Options">
+        <a href="tel:5862240550" class="floating-cta-button phone" aria-label="Call us now">
+            📞 Call Now - Free Quote
         </a>
-        <a href="#contact" class="floating-cta-button">
-            ✉️ Get Quote
+        <a href="#contact" class="floating-cta-button quote" aria-label="Get a free estimate">
+            ✉️ Get Free Estimate
         </a>
     </div>
 
