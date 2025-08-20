@@ -247,27 +247,42 @@ async function loadTransformationSliders() {
     };
 
     let currentIndex = 1;
-
     while (true) {
         const beforeImage = `images/baslider/${currentIndex}.png`;
-        const afterImage = `images/baslider/${String.fromCharCode(96 + currentIndex)}.png`;
+        // Try both number and letter naming conventions for after images
+        const afterImageNumber = `images/baslider/${currentIndex + 1}.png`;
+        const afterImageLetter = `images/baslider/${String.fromCharCode(96 + currentIndex)}.png`;
 
-        // Check if both before and after images exist
-        const [beforeExists, afterExists] = await Promise.all([
+        // Check if before image and either type of after image exists
+        const [beforeExists, afterNumberExists, afterLetterExists] = await Promise.all([
             imageExists(beforeImage),
-            imageExists(afterImage)
+            imageExists(afterImageNumber),
+            imageExists(afterImageLetter)
         ]);
 
-        if (!beforeExists || !afterExists) break;
+        // Stop if we can't find the before image
+        if (!beforeExists) break;
 
-        // Create and add the slider
-        const slider = createBeforeAfterSlider(beforeImage, afterImage, currentIndex);
-        container.appendChild(slider);
+        // Use whichever after image exists (prefer letter naming)
+        const afterImage = afterLetterExists ? afterImageLetter :
+            afterNumberExists ? afterImageNumber : null;
+
+        // Only create slider if we have both images
+        if (afterImage) {
+            // Create and add the slider
+            const slider = createBeforeAfterSlider(beforeImage, afterImage, currentIndex - 1); // Zero-based index for DOM
+            container.appendChild(slider);
+            totalTransformations++;
+        }
 
         currentIndex++;
     }
 
-    totalTransformations = currentIndex - 1;
+    // Reset the count to match actual slides
+    if (totalTransformations === 0) {
+        console.warn('No transformation slides could be loaded');
+        container.innerHTML = '<p>Transformation images coming soon!</p>';
+    }
 
     // Show first transformation and initialize navigation
     if (totalTransformations > 0) {
