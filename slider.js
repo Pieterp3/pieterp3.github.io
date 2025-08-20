@@ -246,7 +246,7 @@ async function loadTransformationSliders() {
         }
     };
 
-    let currentIndex = 1;
+    let currentIndex = 0;
     while (true) {
         const numberImage = `images/baslider/${currentIndex}.png`;
         const letterImage = `images/baslider/${String.fromCharCode(96 + currentIndex)}.png`;
@@ -263,7 +263,7 @@ async function loadTransformationSliders() {
         // Only create slider if we have both images
         if (letterExists) {
             // Create and add the slider
-            const slider = createBeforeAfterSlider(numberImage, letterImage, currentIndex - 1); // Zero-based index for DOM
+            const slider = createBeforeAfterSlider(numberImage, letterImage, currentIndex); // Zero-based index for DOM
             container.appendChild(slider);
             totalTransformations++;
         }
