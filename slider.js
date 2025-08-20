@@ -4,11 +4,13 @@ function createBeforeAfterSlider(beforeImage, afterImage, index) {
     slider.className = 'before-after-slider';
     slider.id = `slider-${index}`;
 
-    // Create before side
+    // Create before side with loading state
     const beforeSide = document.createElement('div');
     beforeSide.className = 'slider-before';
     const beforeImg = document.createElement('img');
     beforeImg.loading = 'lazy';
+    beforeImg.decoding = 'async';
+    beforeImg.fetchPriority = 'high';
     beforeImg.src = beforeImage;
     beforeImg.alt = 'Before transformation';
     beforeImg.srcset = `${beforeImage} 1200w, ${beforeImage} 800w, ${beforeImage} 400w`;

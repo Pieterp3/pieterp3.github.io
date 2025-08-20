@@ -4,23 +4,44 @@ let currentPage = 0;
 const galleryImages = [];
 const imagesPerPage = 3;
 
+// Function to preload images
+async function preloadImage(imagePath) {
+    return new Promise((resolve, reject) => {
+        const img = new Image();
+        img.onload = () => resolve(img);
+        img.onerror = () => reject(new Error(`Failed to load ${imagePath}`));
+        img.src = imagePath;
+    });
+}
+
 // Function to load images from the images folder
 function loadGalleryImages() {
     const galleryGrid = document.getElementById('galleryGrid');
     let loadedImages = 0;
     let currentImage = 1;
+    const imageLoadQueue = [];
+
+    // Create loading placeholder
+    const loadingIndicator = document.createElement('div');
+    loadingIndicator.className = 'loading-indicator';
+    loadingIndicator.textContent = 'Loading gallery...';
+    galleryGrid.appendChild(loadingIndicator);
 
     function tryLoadImage() {
         const imagePath = `images/${currentImage}.png`;
         const img = new Image();
 
         img.onload = function () {
-            // Image exists, add it to gallery
+            // Image exists, prepare gallery item
             const galleryItem = document.createElement('div');
             galleryItem.className = 'gallery-item';
+            galleryItem.style.opacity = '0';
+            galleryItem.style.transition = 'opacity 0.3s ease-in';
 
             const displayImg = document.createElement('img');
-            displayImg.loading = 'lazy'; // Add lazy loading
+            displayImg.loading = 'lazy';
+            displayImg.decoding = 'async'; // Add async decoding
+            displayImg.fetchPriority = loadedImages < 3 ? 'high' : 'low'; // Prioritize first few images
             displayImg.src = imagePath;
             displayImg.alt = `Flooring Installation Project ${currentImage}`;
             displayImg.srcset = `${imagePath} 1200w, ${imagePath} 800w, ${imagePath} 400w`;
