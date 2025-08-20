@@ -47,34 +47,36 @@
         "addressRegion": "MI",
         "addressCountry": "US"
       },
-      "sameAs": [],
-      "hasOfferCatalog": {
-        "@type": "OfferCatalog",
-        "name": "Flooring Services",
-        "itemListElement": [
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Hardwood Flooring Installation"
-            }
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Vinyl Flooring Installation"
-            }
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Laminate Flooring Installation"
-            }
-          }
-        ]
-      }
+      "sameAs": []
+    }
+    </script>
+    "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Flooring Services",
+    "itemListElement": [
+    {
+    "@type": "Offer",
+    "itemOffered": {
+    "@type": "Service",
+    "name": "Hardwood Flooring Installation"
+    }
+    },
+    {
+    "@type": "Offer",
+    "itemOffered": {
+    "@type": "Service",
+    "name": "Vinyl Flooring Installation"
+    }
+    },
+    {
+    "@type": "Offer",
+    "itemOffered": {
+    "@type": "Service",
+    "name": "Laminate Flooring Installation"
+    }
+    }
+    ]
+    }
     }
     </script>
 </head>
@@ -456,8 +458,29 @@
         </a>
     </div>
 
+    <!-- Initialize after DOM is fully loaded -->
     <script src="scripts.js" defer></script>
     <script src="slider.js" defer></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Initialize gallery
+            if (typeof loadGalleryImages === 'function') {
+                loadGalleryImages();
+            }
+
+            // Initialize transformations
+            const container = document.getElementById('transformationSlider');
+            if (container) {
+                // Load first transformation
+                const beforeImg = 'images/baslider/before1.png';
+                const afterImg = 'images/baslider/after1.png';
+                if (typeof createBeforeAfterSlider === 'function') {
+                    const slider = createBeforeAfterSlider(beforeImg, afterImg, 0);
+                    container.appendChild(slider);
+                }
+            }
+        });
+    </script>
 </body>
 
 </html>
