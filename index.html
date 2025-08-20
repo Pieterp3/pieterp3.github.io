@@ -21,6 +21,20 @@
             <h1>Expert Flooring Installation in Metro Detroit</h1>
             <p>Over 9 years of specialized experience in hardwood, vinyl, and more. Free estimates with custom
                 floorplans.</p>
+            <div class="trust-badges">
+                <div class="badge">
+                    <span class="badge-icon">✓</span>
+                    Licensed & Insured
+                </div>
+                <div class="badge">
+                    <span class="badge-icon">⭐</span>
+                    9+ Years Experience
+                </div>
+                <div class="badge">
+                    <span class="badge-icon">🏆</span>
+                    Free Estimates
+                </div>
+            </div>
             <a href="#contact" class="cta-button">Get Your Free Estimate</a>
         </div>
     </section>
@@ -57,6 +71,15 @@
         </div>
     </section>
 
+    <section class="section transformations">
+        <div class="section-content">
+            <h2 class="section-title">Stunning Transformations</h2>
+            <div class="before-after-container" id="transformationSlider">
+                <!-- Before/After sliders will be added here dynamically -->
+            </div>
+        </div>
+    </section>
+
     <section class="section gallery">
         <div class="section-content">
             <h2 class="section-title">Our Work</h2>
@@ -72,11 +95,16 @@
             </div>
         </div>
         <!-- Lightbox -->
-        <div class="lightbox" id="lightbox">
-            <button class="lightbox-close" onclick="closeLightbox()">×</button>
-            <button class="lightbox-nav lightbox-prev" onclick="changeImage(-1)">❮</button>
-            <img id="lightboxImage" src="" alt="Full size image">
-            <button class="lightbox-nav lightbox-next" onclick="changeImage(1)">❯</button>
+        <div class="lightbox" id="lightbox" role="dialog" aria-label="Image Gallery">
+            <button class="lightbox-close" onclick="closeLightbox()" aria-label="Close gallery">×</button>
+            <div class="lightbox-content">
+                <button class="lightbox-nav lightbox-prev" onclick="changeImage(-1)"
+                    aria-label="Previous image">❮</button>
+                <div class="lightbox-main">
+                    <img id="lightboxImage" src="" alt="Gallery image" aria-live="polite">
+                </div>
+                <button class="lightbox-nav lightbox-next" onclick="changeImage(1)" aria-label="Next image">❯</button>
+            </div>
         </div>
     </section>
 
@@ -133,6 +161,87 @@
         </div>
     </section>
 
+    <section class="section testimonials-section">
+        <div class="section-content">
+            <h2 class="section-title">What Our Customers Say</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">★★★★★</div>
+                    <p class="testimonial-text">"Exceptional work on our hardwood floors. The attention to detail and
+                        craftsmanship was outstanding. Our home looks completely transformed!"</p>
+                    <p class="testimonial-author">- Sarah M., Rochester Hills</p>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">★★★★★</div>
+                    <p class="testimonial-text">"Professional, punctual, and perfect results. They installed vinyl
+                        flooring throughout our first floor and we couldn't be happier."</p>
+                    <p class="testimonial-author">- Mike D., Troy</p>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">★★★★★</div>
+                    <p class="testimonial-text">"Fair pricing and excellent communication throughout the project. The
+                        team was clean, efficient, and highly skilled."</p>
+                    <p class="testimonial-author">- Jennifer R., Oxford</p>
+                </div>
+            </div>
+            <div class="testimonial-stats">
+                <div class="stat-item">
+                    <div class="stat-number">100+</div>
+                    <div class="stat-label">Projects Completed</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">9+</div>
+                    <div class="stat-label">Years Experience</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">5★</div>
+                    <div class="stat-label">Average Rating</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section business-info">
+        <div class="section-content">
+            <h2 class="section-title">Service Area & Hours</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>Service Areas</h3>
+                    <div class="areas-grid">
+                        <div class="area">
+                            <h4>Oakland County</h4>
+                            <p>Oxford, Lake Orion, Rochester, Rochester Hills, Troy, Birmingham, and surrounding areas
+                            </p>
+                        </div>
+                        <div class="area">
+                            <h4>Macomb County</h4>
+                            <p>Romeo, Washington, Shelby Township, Sterling Heights, Clinton Township, Macomb, and
+                                surrounding areas</p>
+                        </div>
+                        <div class="area">
+                            <h4>Additional Areas</h4>
+                            <p>Contact us for service availability in your area</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="info-card hours-card">
+                    <h3>Business Hours</h3>
+                    <div class="hours-grid">
+                        <div class="hours-row">
+                            <span class="day">Monday - Friday</span>
+                            <span class="time">9:00 AM - 5:00 PM</span>
+                        </div>
+                        <div class="hours-row">
+                            <span class="day">Saturday - Sunday</span>
+                            <span class="time">Closed</span>
+                        </div>
+                        <p class="hours-note">Evening and weekend estimates available by appointment</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section class="section" id="contact">
         <div class="section-content">
             <h2 class="section-title">Get Your Free Estimate</h2>
@@ -155,10 +264,50 @@
                         <input type="text" id="address" name="address" required>
                     </div>
                     <div class="form-group">
-                        <label for="message">Project Details</label>
-                        <textarea id="message" name="message" required></textarea>
+                        <label for="contactMethod">Preferred Contact Method</label>
+                        <select id="contactMethod" name="contactMethod" required>
+                            <option value="">Select preferred contact method</option>
+                            <option value="phone">Phone Call</option>
+                            <option value="text">Text Message</option>
+                            <option value="email">Email</option>
+                        </select>
                     </div>
-                    <button type="submit" class="submit-button">Request Estimate</button>
+                    <div class="form-group">
+                        <label for="contactTime">Best Time to Contact</label>
+                        <select id="contactTime" name="contactTime" required>
+                            <option value="">Select best time</option>
+                            <option value="morning">Morning (8AM - 12PM)</option>
+                            <option value="afternoon">Afternoon (12PM - 5PM)</option>
+                            <option value="evening">Evening (5PM - 8PM)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="projectType">Type of Project</label>
+                        <select id="projectType" name="projectType" required>
+                            <option value="">Select project type</option>
+                            <option value="hardwood">Hardwood Flooring</option>
+                            <option value="vinyl">Vinyl Flooring</option>
+                            <option value="laminate">Laminate Flooring</option>
+                            <option value="baseboards">Baseboards & Trim</option>
+                            <option value="rubber">Rubber Flooring</option>
+                            <option value="vct">VCT Installation</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Project Details</label>
+                        <textarea id="message" name="message"
+                            placeholder="Please include approximate square footage and any specific requirements or questions."
+                            required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="urgent" id="urgent">
+                            This is an urgent request
+                        </label>
+                    </div>
+                    <button type="submit" class="submit-button">Request Free Estimate</button>
+                    <p class="form-note">* We typically respond within 24 hours</p>
                 </form>
             </div>
         </div>
@@ -172,7 +321,18 @@
                 Facebook</a></p>
     </footer>
 
+    <!-- Floating CTA Buttons -->
+    <div class="floating-cta">
+        <a href="tel:5862240550" class="floating-cta-button phone">
+            📞 Call Now
+        </a>
+        <a href="#contact" class="floating-cta-button">
+            ✉️ Get Quote
+        </a>
+    </div>
+
     <script src="scripts.js"></script>
+    <script src="slider.js"></script>
 </body>
 
 </html>
